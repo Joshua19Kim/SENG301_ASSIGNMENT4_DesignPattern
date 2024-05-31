@@ -1,0 +1,86 @@
+@startuml
+class Game {
+    - LOGGER : Logger
+    - cli : CommandLineInterface
+    - playerAccessor : PlayerAccessor
+    - packAccessor : PackAccessor
+    - petAccessor : PetAccessor
+    - petGenerator : PetGenerator
+    - teams : HashMap<String, Team>
+    - random : Random
+    + Game()
+    + Game(PetGenerator, CommandLineInterface, SessionFactory)
+    + loadDefault() : void
+    + play() : void
+    + createPlayer(String) : void
+    + createPack(String) : void
+    + addToPack(String) : void
+    + buildTeam(String) : void
+    + battle(String) : void
+    + printTeams() : void
+    + print(String) : void
+    + help() : void
+}
+note right : Client
+
+
+interface CloneablePet <<Interface>> {
+    + getGamePet() : GamePet
+}
+note right: Prototype
+
+class Pet {
+    - petId : Long
+    - pack : Pack
+    - name : String
+    - emoji : String
+    - attack : int
+    - health : int
+    - tier : int
+    + Pet()
+    + getPetId() : Long
+    + setPetId(Long) : void
+    + getPack() : Pack
+    + setPack(Pack) : void
+    + getName() : String
+    + setName(String) : void
+    + getAttack() : int
+    + setAttack(int) : void
+    + getHealth() : int
+    + setHealth(int) : void
+    + getTier() : int
+    + setTier(int) : void
+    + setEmoji(String) : void
+    + getEmoji() : String
+    + toString() : String
+    + equals(Object) : boolean
+    + hashCode() : int
+    + getPackId() : Long
+    + getGamePet() : GamePet
+}
+note right: ConcretePrototype
+
+class GamePet extends Pet {
+    - specialAbility : SpecialAbility
+    + GamePet(String, int, int, String)
+    + GamePet(String, int, int, String, SpecialAbility)
+    + takeDamage(int) : void
+    + heal(int) : void
+    + buffAttack(int) : void
+    + debuffAttack(int) : void
+    + equals(Object) : boolean
+    + hashCode() : int
+    + getGamePet() : GamePet
+    + setAttack(int) : void
+    + setHealth(int) : void
+    + getStatsString() : String
+    + getSpecialAbility() : SpecialAbility
+    + toString() : String
+}
+note right: SubclassPrototype
+
+
+Game --> CloneablePet
+CloneablePet <|.. Pet
+
+@enduml
