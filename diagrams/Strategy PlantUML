@@ -1,48 +1,35 @@
 @startuml
-class BattleRunner {
-    - CommandLineInterface cli
-    - BattlePrinter battlePrinter
-    - Team leftTeam
-    - Team rightTeam
-    - startBattle()
-    - roundBattle(leftTeam: Team, rightTeam: Team): boolean
+class BattleRunner <<Client>> {
 }
 
-class GamePet {
-    - String name
-    - int attack
-    - int health
-    - String emoji
-    - SpecialAbility specialAbility
-    - takeDamage(damageAmount: int)
-    - heal(healAmount: int)
-    - buffAttack(buffAmount: int)
-    - debuffAttack(debuffAmount: int)
-    - getSpecialAbility(): SpecialAbility
+class GamePet <<Context>> {
+    - SPECIALABILITY: Specialability
+    + <<Constructor>> GamePet()
+    + getSpecialAbility(): SpecialAbility
 }
 
-interface SpecialAbility {
-    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface)
+interface SpecialAbility <<Strategy>> {
+    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface) : void
 }
 
-class BuffSelf {
-    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface)
+class BuffSelf <<ConcreteStrategyA>> {
+    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface) : void
 }
 
-class HealSelf {
-    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface)
+class HealSelf <<ConcreteStrategyB>> {
+    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface) : void
 }
 
-class HealBoth {
-    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface)
+class HealBoth <<ConcreteStrategyC>> {
+    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface) : void
 }
 
-class DebuffEnemy {
-    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface)
+class DebuffEnemy <<ConcreteStrategyD>> {
+    + useSpecialAbility(self: GamePet, other: GamePet, cli: CommandLineInterface) : void
 }
 
-BattleRunner --> GamePet
-GamePet *--> SpecialAbility
+BattleRunner --> GamePet : > uses
+GamePet *--> "1" SpecialAbility
 SpecialAbility <|.. BuffSelf
 SpecialAbility <|.. HealSelf
 SpecialAbility <|.. HealBoth
@@ -52,13 +39,4 @@ BattleRunner -.-> HealSelf
 BattleRunner -.-> HealBoth
 BattleRunner -.-> DebuffEnemy
 
-
-
-note right of BattleRunner : Client
-note right of GamePet : Context
-note right of SpecialAbility : Strategy
-note right of BuffSelf : ConcreteStrategyA
-note right of HealSelf : ConcreteStrategyB
-note right of HealBoth : ConcreteStrategyC
-note right of DebuffEnemy : ConcreteStrategyD
 @enduml

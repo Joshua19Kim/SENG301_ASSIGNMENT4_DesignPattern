@@ -8,7 +8,7 @@ note right: Aggregate
 
 
 class TeamList implements Team {
-  - name: String
+  - NAME: String
   + TeamList(name: String, pets: List<GamePet>)
   + TeamList(other: Team)
   + getName(): String
@@ -19,7 +19,7 @@ note right: ConcreteAggregate
 
 
 interface TeamOrdering <<Interface>> {
-  + getNextPet(): GamePet throws NoRemainingPetsException
+  + getNextPet(): GamePet
   + hasRemainingPets(): boolean
 }
 note left: Iterator
@@ -27,37 +27,30 @@ note left: Iterator
 
 class OrderedTeam implements TeamOrdering {
   - currentIndex: int
-  - pets: Team
+  - PETS: Team
   + OrderedTeam(pets: Team)
-  + getNextPet(): GamePet throws NoRemainingPetsException
+  + getNextPet(): GamePet
   + hasRemainingPets(): boolean
 }
 note left: ConcreteIteratorA
 
 class ReversedTeam implements TeamOrdering {
   - currentIndex: int
-  - pets: Team
+  - PETS: Team
   + ReversedTeam(pets: Team)
-  + getNextPet(): GamePet throws NoRemainingPetsException
+  + getNextPet(): GamePet
   + hasRemainingPets(): boolean
 }
 note right: ConcreteIteratorB
 
 
 class BattleRunner {
-  - cli: CommandLineInterface
-  - battlePrinter: BattlePrinter
-  - leftTeam: Team
-  - rightTeam: Team
-  + BattleRunner(cli: CommandLineInterface, leftTeam: Team, rightTeam: Team)
-  + startBattle(): void
-  + roundBattle(leftTeam: Team, rightTeam: Team): boolean
 }
 note right: Client
 
 Team -.-> TeamOrdering
-BattleRunner --> Team
-BattleRunner --> TeamOrdering
+BattleRunner --> Team : > gets
+BattleRunner --> TeamOrdering : > uses
 TeamList <--> ReversedTeam
 TeamList <--> OrderedTeam
 @enduml

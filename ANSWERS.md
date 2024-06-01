@@ -20,7 +20,7 @@ This iterator pattern is used in the Super Auto Pets app to:
 
 #### Name of UML Class diagram attached
 
-**YOUR ANSWER**
+./diagrams/sap-iterator-domain.png
 
 #### Mapping to GoF pattern elements
 
@@ -48,7 +48,7 @@ This prototype pattern is used in the Super Auto Pets app to:
 
 #### Name of UML Class diagram attached
 
-**YOUR ANSWER**
+./diagrams/sap-prototype-domain.png
 
 #### Mapping to GoF pattern elements
 
@@ -72,12 +72,12 @@ Strategy pattern
 
 This strategy pattern is used in the Super Auto Pets app to:
 
-- encapsulate each of concrete strategies(BuffSelf, DebuffEnemy, HealBoth and HealSelf).
-- make the strategies interchangeable.
+- encapsulate each of concrete strategies(BuffSelf, DebuffEnemy, HealBoth and HealSelf).// we can easily add more strategy in the future.
+- make the strategies interchangeable. 
 
 #### Name of UML Class diagram attached
 
-**YOUR ANSWER**
+./diagrams/sap-strategy-domain.png
 
 #### Mapping to GoF pattern elements
 
@@ -94,9 +94,8 @@ This strategy pattern is used in the Super Auto Pets app to:
 
 ## Task 2 - Full UML Class diagram
 
-### Name of file of full UML Class diagram attached
-I have chosen GamePet as Context as it does setStrategy which is getRandomAbility().
-Client is BattleRunner because it does doSomething() which is useSpecialAbility()
+./diagrams/sap-my-domain.png
+
 
 ## Task 3 - Implement new feature
 

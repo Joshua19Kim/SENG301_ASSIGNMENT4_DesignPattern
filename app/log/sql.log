@@ -2055,3 +2055,349 @@
 22:40:19.612 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
 22:40:19.614 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
 22:40:19.616 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:49:29.810 [main] DEBUG org.hibernate.SQL - create table HTE_pet(attack integer, health integer, rn_ integer not null, tier integer, id_pack bigint, id_pet bigint, hib_sess_id char(36) not null, emoji varchar(255), name varchar(255), primary key (rn_, hib_sess_id))
+16:49:29.823 [main] DEBUG org.hibernate.SQL - create table HTE_player(rn_ integer not null, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+16:49:29.828 [main] DEBUG org.hibernate.SQL - create table HTE_pack(rn_ integer not null, id_pack bigint, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+16:49:29.920 [main] DEBUG org.hibernate.SQL - drop table if exists pack
+16:49:29.941 [main] DEBUG org.hibernate.SQL - drop table if exists pack_SEQ
+16:49:29.958 [main] DEBUG org.hibernate.SQL - drop table if exists pet
+16:49:29.975 [main] DEBUG org.hibernate.SQL - drop table if exists pet_SEQ
+16:49:29.992 [main] DEBUG org.hibernate.SQL - drop table if exists player
+16:49:30.009 [main] DEBUG org.hibernate.SQL - drop table if exists player_SEQ
+16:49:30.031 [main] DEBUG org.hibernate.SQL - create table pack (id_pack bigint not null, id_player bigint, name varchar(255), primary key (id_pack))
+16:49:30.047 [main] DEBUG org.hibernate.SQL - create table pack_SEQ (next_val bigint)
+16:49:30.064 [main] DEBUG org.hibernate.SQL - insert into pack_SEQ values ( 1 )
+16:49:30.084 [main] DEBUG org.hibernate.SQL - create table pet (attack integer not null, health integer not null, tier integer not null, id_pack bigint, id_pet bigint not null, emoji varchar(255), name varchar(255), primary key (id_pet))
+16:49:30.104 [main] DEBUG org.hibernate.SQL - create table pet_SEQ (next_val bigint)
+16:49:30.122 [main] DEBUG org.hibernate.SQL - insert into pet_SEQ values ( 1 )
+16:49:30.142 [main] DEBUG org.hibernate.SQL - create table player (id_player bigint not null, name varchar(255), primary key (id_player))
+16:49:30.162 [main] DEBUG org.hibernate.SQL - create table player_SEQ (next_val bigint)
+16:49:30.180 [main] DEBUG org.hibernate.SQL - insert into player_SEQ values ( 1 )
+16:49:30.454 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+16:49:30.468 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+16:49:30.478 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+16:49:30.510 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+16:49:30.537 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+16:49:30.544 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+16:49:30.549 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+16:49:30.563 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+16:49:30.586 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+16:49:30.608 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:49:30.612 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+16:49:30.616 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+16:49:30.628 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+16:49:30.647 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+16:49:30.655 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:49:30.658 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+16:49:30.663 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+16:49:30.678 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+16:49:30.704 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+16:49:30.711 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+16:49:30.726 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:49:30.767 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:49:30.779 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:49:30.781 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:49:30.785 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:49:30.800 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+16:49:30.806 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+16:49:30.819 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:49:30.845 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:49:30.858 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:49:30.861 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:49:30.865 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:49:48.154 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='joshTeam'
+16:49:48.170 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+16:50:27.842 [main] DEBUG org.hibernate.SQL - create table HTE_pet(attack integer, health integer, rn_ integer not null, tier integer, id_pack bigint, id_pet bigint, hib_sess_id char(36) not null, emoji varchar(255), name varchar(255), primary key (rn_, hib_sess_id))
+16:50:27.855 [main] DEBUG org.hibernate.SQL - create table HTE_player(rn_ integer not null, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+16:50:27.860 [main] DEBUG org.hibernate.SQL - create table HTE_pack(rn_ integer not null, id_pack bigint, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+16:50:27.946 [main] DEBUG org.hibernate.SQL - drop table if exists pack
+16:50:27.966 [main] DEBUG org.hibernate.SQL - drop table if exists pack_SEQ
+16:50:27.986 [main] DEBUG org.hibernate.SQL - drop table if exists pet
+16:50:28.008 [main] DEBUG org.hibernate.SQL - drop table if exists pet_SEQ
+16:50:28.028 [main] DEBUG org.hibernate.SQL - drop table if exists player
+16:50:28.049 [main] DEBUG org.hibernate.SQL - drop table if exists player_SEQ
+16:50:28.076 [main] DEBUG org.hibernate.SQL - create table pack (id_pack bigint not null, id_player bigint, name varchar(255), primary key (id_pack))
+16:50:28.095 [main] DEBUG org.hibernate.SQL - create table pack_SEQ (next_val bigint)
+16:50:28.118 [main] DEBUG org.hibernate.SQL - insert into pack_SEQ values ( 1 )
+16:50:28.142 [main] DEBUG org.hibernate.SQL - create table pet (attack integer not null, health integer not null, tier integer not null, id_pack bigint, id_pet bigint not null, emoji varchar(255), name varchar(255), primary key (id_pet))
+16:50:28.164 [main] DEBUG org.hibernate.SQL - create table pet_SEQ (next_val bigint)
+16:50:28.187 [main] DEBUG org.hibernate.SQL - insert into pet_SEQ values ( 1 )
+16:50:28.209 [main] DEBUG org.hibernate.SQL - create table player (id_player bigint not null, name varchar(255), primary key (id_player))
+16:50:28.230 [main] DEBUG org.hibernate.SQL - create table player_SEQ (next_val bigint)
+16:50:28.250 [main] DEBUG org.hibernate.SQL - insert into player_SEQ values ( 1 )
+16:50:28.460 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+16:50:28.476 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+16:50:28.487 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+16:50:28.520 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+16:50:28.550 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+16:50:28.558 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+16:50:28.564 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+16:50:28.579 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+16:50:28.611 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+16:50:28.638 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:50:28.643 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+16:50:28.648 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+16:50:28.664 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+16:50:28.691 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+16:50:28.702 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:50:28.706 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+16:50:28.711 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+16:50:28.728 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+16:50:28.755 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+16:50:28.762 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+16:50:28.779 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:50:28.819 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:50:28.833 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:50:28.835 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:50:28.839 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:50:28.856 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+16:50:28.864 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+16:50:28.880 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:50:28.910 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:50:28.926 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:50:28.929 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:50:28.935 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:50:37.673 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:50:37.687 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+16:50:47.671 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:50:47.684 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:50:47.690 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+16:51:02.678 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:51:02.692 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:02.697 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:12.675 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:51:12.685 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:12.690 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:17.684 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p1_0.id_player from pack p1_0 where p1_0.name='jpck'
+16:51:17.694 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name,p2_0.id_player,p2_0.id_pack,p2_0.name from player p1_0 left join pack p2_0 on p1_0.id_player=p2_0.id_player where p1_0.id_player=?
+16:51:17.699 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:17.705 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:51:17.729 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:51:17.743 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:17.746 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:51:17.750 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:51:23.676 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:51:23.691 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:23.697 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:25.677 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p1_0.id_player from pack p1_0 where p1_0.name='jpck'
+16:51:25.686 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name,p2_0.id_player,p2_0.id_pack,p2_0.name from player p1_0 left join pack p2_0 on p1_0.id_player=p2_0.id_player where p1_0.id_player=?
+16:51:25.692 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:25.700 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:51:25.723 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:51:25.737 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:25.739 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:51:25.744 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:51:32.678 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:51:32.690 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:32.694 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:35.678 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p1_0.id_player from pack p1_0 where p1_0.name='jpck'
+16:51:35.686 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name,p2_0.id_player,p2_0.id_pack,p2_0.name from player p1_0 left join pack p2_0 on p1_0.id_player=p2_0.id_player where p1_0.id_player=?
+16:51:35.691 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:35.701 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:51:35.730 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:51:35.747 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:35.749 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:51:35.753 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:51:39.679 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:51:39.691 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:39.695 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:46.680 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:51:46.688 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:46.692 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:48.680 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p1_0.id_player from pack p1_0 where p1_0.name='jpck'
+16:51:48.690 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name,p2_0.id_player,p2_0.id_pack,p2_0.name from player p1_0 left join pack p2_0 on p1_0.id_player=p2_0.id_player where p1_0.id_player=?
+16:51:48.695 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:48.705 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:51:48.724 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:51:48.737 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:48.738 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:51:48.741 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:51:52.681 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:51:52.693 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:52.697 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:55.681 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p1_0.id_player from pack p1_0 where p1_0.name='jpck'
+16:51:55.690 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name,p2_0.id_player,p2_0.id_pack,p2_0.name from player p1_0 left join pack p2_0 on p1_0.id_player=p2_0.id_player where p1_0.id_player=?
+16:51:55.694 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:51:55.703 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:51:55.728 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:51:55.746 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:55.749 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:51:55.752 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:51:59.681 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:51:59.694 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:51:59.698 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:52:01.682 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p1_0.id_player from pack p1_0 where p1_0.name='jpck'
+16:52:01.690 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name,p2_0.id_player,p2_0.id_pack,p2_0.name from player p1_0 left join pack p2_0 on p1_0.id_player=p2_0.id_player where p1_0.id_player=?
+16:52:01.694 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:52:01.703 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+16:52:01.726 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+16:52:01.743 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:52:01.745 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+16:52:01.747 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+16:52:24.684 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:52:24.693 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:52:24.695 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:52:38.687 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:52:38.696 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:52:38.699 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:53:38.699 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:53:38.710 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:53:38.729 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:53:48.700 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='josh'
+16:53:48.709 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+16:53:48.710 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p1_0.tier from pet p1_0 where p1_0.id_pack=?
+16:53:52.702 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='jpck'
+18:39:15.841 [main] DEBUG org.hibernate.SQL - create table HTE_pet(attack integer, health integer, rn_ integer not null, tier integer, id_pack bigint, id_pet bigint, hib_sess_id char(36) not null, emoji varchar(255), name varchar(255), primary key (rn_, hib_sess_id))
+18:39:15.867 [main] DEBUG org.hibernate.SQL - create table HTE_player(rn_ integer not null, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+18:39:15.873 [main] DEBUG org.hibernate.SQL - create table HTE_pack(rn_ integer not null, id_pack bigint, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+18:39:15.959 [main] DEBUG org.hibernate.SQL - drop table if exists pack
+18:39:15.983 [main] DEBUG org.hibernate.SQL - drop table if exists pack_SEQ
+18:39:16.004 [main] DEBUG org.hibernate.SQL - drop table if exists pet
+18:39:16.026 [main] DEBUG org.hibernate.SQL - drop table if exists pet_SEQ
+18:39:16.047 [main] DEBUG org.hibernate.SQL - drop table if exists player
+18:39:16.068 [main] DEBUG org.hibernate.SQL - drop table if exists player_SEQ
+18:39:16.095 [main] DEBUG org.hibernate.SQL - create table pack (id_pack bigint not null, id_player bigint, name varchar(255), primary key (id_pack))
+18:39:16.115 [main] DEBUG org.hibernate.SQL - create table pack_SEQ (next_val bigint)
+18:39:16.137 [main] DEBUG org.hibernate.SQL - insert into pack_SEQ values ( 1 )
+18:39:16.163 [main] DEBUG org.hibernate.SQL - create table pet (attack integer not null, health integer not null, tier integer not null, id_pack bigint, id_pet bigint not null, emoji varchar(255), name varchar(255), primary key (id_pet))
+18:39:16.185 [main] DEBUG org.hibernate.SQL - create table pet_SEQ (next_val bigint)
+18:39:16.208 [main] DEBUG org.hibernate.SQL - insert into pet_SEQ values ( 1 )
+18:39:16.230 [main] DEBUG org.hibernate.SQL - create table player (id_player bigint not null, name varchar(255), primary key (id_player))
+18:39:16.251 [main] DEBUG org.hibernate.SQL - create table player_SEQ (next_val bigint)
+18:39:16.272 [main] DEBUG org.hibernate.SQL - insert into player_SEQ values ( 1 )
+18:39:16.493 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+18:39:16.508 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+18:39:16.520 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+18:39:16.564 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+18:39:16.598 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+18:39:16.608 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+18:39:16.613 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+18:39:16.630 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+18:39:16.656 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+18:39:16.672 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+18:39:16.677 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+18:39:16.682 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+18:39:16.698 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+18:39:16.725 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+18:39:16.737 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+18:39:16.742 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+18:39:16.748 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+18:39:16.765 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+18:39:16.795 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+18:39:16.803 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+18:39:16.818 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+18:39:16.863 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+18:39:16.876 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+18:39:16.877 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+18:39:16.881 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+18:39:16.897 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+18:39:16.904 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+18:39:16.920 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+18:39:16.950 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+18:39:16.966 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+18:39:16.969 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+18:39:16.974 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+18:39:27.643 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='jk'
+18:39:27.657 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+18:39:35.642 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='kim'
+18:39:35.658 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+00:44:02.293 [main] DEBUG org.hibernate.SQL - create table HTE_pet(attack integer, health integer, rn_ integer not null, tier integer, id_pack bigint, id_pet bigint, hib_sess_id char(36) not null, emoji varchar(255), name varchar(255), primary key (rn_, hib_sess_id))
+00:44:02.317 [main] DEBUG org.hibernate.SQL - create table HTE_player(rn_ integer not null, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+00:44:02.324 [main] DEBUG org.hibernate.SQL - create table HTE_pack(rn_ integer not null, id_pack bigint, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+00:44:02.420 [main] DEBUG org.hibernate.SQL - drop table if exists pack
+00:44:02.445 [main] DEBUG org.hibernate.SQL - drop table if exists pack_SEQ
+00:44:02.468 [main] DEBUG org.hibernate.SQL - drop table if exists pet
+00:44:02.491 [main] DEBUG org.hibernate.SQL - drop table if exists pet_SEQ
+00:44:02.513 [main] DEBUG org.hibernate.SQL - drop table if exists player
+00:44:02.536 [main] DEBUG org.hibernate.SQL - drop table if exists player_SEQ
+00:44:02.566 [main] DEBUG org.hibernate.SQL - create table pack (id_pack bigint not null, id_player bigint, name varchar(255), primary key (id_pack))
+00:44:02.585 [main] DEBUG org.hibernate.SQL - create table pack_SEQ (next_val bigint)
+00:44:02.608 [main] DEBUG org.hibernate.SQL - insert into pack_SEQ values ( 1 )
+00:44:02.634 [main] DEBUG org.hibernate.SQL - create table pet (attack integer not null, health integer not null, tier integer not null, id_pack bigint, id_pet bigint not null, emoji varchar(255), name varchar(255), primary key (id_pet))
+00:44:02.658 [main] DEBUG org.hibernate.SQL - create table pet_SEQ (next_val bigint)
+00:44:02.681 [main] DEBUG org.hibernate.SQL - insert into pet_SEQ values ( 1 )
+00:44:02.705 [main] DEBUG org.hibernate.SQL - create table player (id_player bigint not null, name varchar(255), primary key (id_player))
+00:44:02.728 [main] DEBUG org.hibernate.SQL - create table player_SEQ (next_val bigint)
+00:44:02.750 [main] DEBUG org.hibernate.SQL - insert into player_SEQ values ( 1 )
+00:44:02.967 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+00:44:02.984 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+00:44:02.997 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+00:44:03.049 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+00:44:03.095 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+00:44:03.104 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+00:44:03.110 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+00:44:03.127 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+00:44:03.158 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+00:44:03.183 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+00:44:03.188 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+00:44:03.193 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+00:44:03.210 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+00:44:03.238 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+00:44:03.249 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+00:44:03.253 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+00:44:03.260 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+00:44:03.276 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+00:44:03.306 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+00:44:03.315 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+00:44:03.332 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+00:44:03.379 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+00:44:03.392 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+00:44:03.394 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+00:44:03.398 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+00:44:03.415 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+00:44:03.423 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+00:44:03.439 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+00:44:03.472 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+00:44:03.487 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+00:44:03.490 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+00:44:03.494 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+02:34:41.869 [main] DEBUG org.hibernate.SQL - create table HTE_pet(attack integer, health integer, rn_ integer not null, tier integer, id_pack bigint, id_pet bigint, hib_sess_id char(36) not null, emoji varchar(255), name varchar(255), primary key (rn_, hib_sess_id))
+02:34:41.899 [main] DEBUG org.hibernate.SQL - create table HTE_player(rn_ integer not null, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+02:34:41.904 [main] DEBUG org.hibernate.SQL - create table HTE_pack(rn_ integer not null, id_pack bigint, id_player bigint, hib_sess_id char(36) not null, name varchar(255), primary key (rn_, hib_sess_id))
+02:34:41.989 [main] DEBUG org.hibernate.SQL - drop table if exists pack
+02:34:42.011 [main] DEBUG org.hibernate.SQL - drop table if exists pack_SEQ
+02:34:42.031 [main] DEBUG org.hibernate.SQL - drop table if exists pet
+02:34:42.052 [main] DEBUG org.hibernate.SQL - drop table if exists pet_SEQ
+02:34:42.071 [main] DEBUG org.hibernate.SQL - drop table if exists player
+02:34:42.091 [main] DEBUG org.hibernate.SQL - drop table if exists player_SEQ
+02:34:42.117 [main] DEBUG org.hibernate.SQL - create table pack (id_pack bigint not null, id_player bigint, name varchar(255), primary key (id_pack))
+02:34:42.135 [main] DEBUG org.hibernate.SQL - create table pack_SEQ (next_val bigint)
+02:34:42.154 [main] DEBUG org.hibernate.SQL - insert into pack_SEQ values ( 1 )
+02:34:42.176 [main] DEBUG org.hibernate.SQL - create table pet (attack integer not null, health integer not null, tier integer not null, id_pack bigint, id_pet bigint not null, emoji varchar(255), name varchar(255), primary key (id_pet))
+02:34:42.196 [main] DEBUG org.hibernate.SQL - create table pet_SEQ (next_val bigint)
+02:34:42.216 [main] DEBUG org.hibernate.SQL - insert into pet_SEQ values ( 1 )
+02:34:42.236 [main] DEBUG org.hibernate.SQL - create table player (id_player bigint not null, name varchar(255), primary key (id_player))
+02:34:42.258 [main] DEBUG org.hibernate.SQL - create table player_SEQ (next_val bigint)
+02:34:42.279 [main] DEBUG org.hibernate.SQL - insert into player_SEQ values ( 1 )
+02:34:42.487 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+02:34:42.503 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+02:34:42.515 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+02:34:42.554 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+02:34:42.583 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+02:34:42.592 [main] DEBUG org.hibernate.SQL - select next_val as id_val from player_SEQ
+02:34:42.597 [main] DEBUG org.hibernate.SQL - update player_SEQ set next_val= ? where next_val=?
+02:34:42.612 [main] DEBUG org.hibernate.SQL - insert into player (name,id_player) values (?,?)
+02:34:42.643 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bob'
+02:34:42.668 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+02:34:42.673 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+02:34:42.678 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+02:34:42.692 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+02:34:42.717 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.name from player p1_0 where p1_0.name='Bailey'
+02:34:42.727 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+02:34:42.732 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pack_SEQ
+02:34:42.738 [main] DEBUG org.hibernate.SQL - update pack_SEQ set next_val= ? where next_val=?
+02:34:42.753 [main] DEBUG org.hibernate.SQL - insert into pack (name,id_player,id_pack) values (?,?,?)
+02:34:42.780 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+02:34:42.788 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+02:34:42.805 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+02:34:42.854 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+02:34:42.872 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+02:34:42.874 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+02:34:42.879 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?
+02:34:42.895 [main] DEBUG org.hibernate.SQL - select next_val as id_val from pet_SEQ
+02:34:42.903 [main] DEBUG org.hibernate.SQL - update pet_SEQ set next_val= ? where next_val=?
+02:34:42.917 [main] DEBUG org.hibernate.SQL - insert into pet (attack,emoji,health,name,id_pack,tier,id_pet) values (?,?,?,?,?,?,?)
+02:34:42.943 [main] DEBUG org.hibernate.SQL - select p1_0.id_pack,p1_0.name,p2_0.id_player,p2_0.name,p3_0.id_pack,p3_0.id_pet,p3_0.attack,p3_0.emoji,p3_0.health,p3_0.name,p3_0.tier from pack p1_0 left join player p2_0 on p2_0.id_player=p1_0.id_player left join pet p3_0 on p1_0.id_pack=p3_0.id_pack where p1_0.id_pack=?
+02:34:42.958 [main] DEBUG org.hibernate.SQL - select p1_0.id_player,p1_0.id_pack,p1_0.name from pack p1_0 where p1_0.id_player=?
+02:34:42.961 [main] DEBUG org.hibernate.SQL - select p1_0.id_pet,p1_0.attack,p1_0.emoji,p1_0.health,p1_0.name,p2_0.id_pack,p2_0.name,p3_0.id_player,p3_0.name,p1_0.tier from pet p1_0 left join pack p2_0 on p2_0.id_pack=p1_0.id_pack left join player p3_0 on p3_0.id_player=p2_0.id_player where p1_0.id_pet=?
+02:34:42.966 [main] DEBUG org.hibernate.SQL - update pet set id_pack=? where id_pet=?

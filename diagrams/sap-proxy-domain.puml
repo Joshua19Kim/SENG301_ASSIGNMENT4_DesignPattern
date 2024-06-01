@@ -24,7 +24,7 @@ class PetProxy <<Proxy>> {
 PetGenerator <|- PetProxy
 PetGenerator <|- PetService 
 PetProxy "1" *--- "1" PetService 
-' PetService "1" - "0..*" PetResponse : > unpack
+PetService "1" - "0..*" PetResponse : > unpack
 
 Game --> PetGenerator: > uses
 
