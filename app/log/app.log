@@ -2934,3 +2934,32 @@ org.hibernate.NonUniqueResultException: Query did not return a unique result: 7 
 02:34:42.942 [main] INFO  uc.seng301.petbattler.asg4.accessor.PackAccessor:183 - Update existing pack object { packId='2', player='Bailey', pets='[Duck -- Atk: 3 Health: 6 Tier: 1]', name='p1'}
 02:34:53.668 [main] INFO  uc.seng301.petbattler.asg4.Game:114 - User input: battle t1 t2
 02:34:53.669 [main] INFO  uc.seng301.petbattler.asg4.Game:316 - battle arguments: battle t1 t2
+00:46:16.538 [main] INFO  uc.seng301.petbattler.asg4.App:19 - Starting application...
+00:46:17.839 [main] INFO  uc.seng301.petbattler.asg4.accessor.PlayerAccessor:44 - Creating player with name Bob
+00:46:17.849 [main] INFO  uc.seng301.petbattler.asg4.accessor.PlayerAccessor:109 - Save player Player (null): Bob
+	Packs:
+ to persistence
+00:46:17.849 [main] INFO  uc.seng301.petbattler.asg4.accessor.PlayerAccessor:67 - Getting player with name Bob from persistence
+00:46:18.072 [main] INFO  uc.seng301.petbattler.asg4.accessor.PlayerAccessor:44 - Creating player with name Bailey
+00:46:18.072 [main] INFO  uc.seng301.petbattler.asg4.accessor.PlayerAccessor:109 - Save player Player (null): Bailey
+	Packs:
+ to persistence
+00:46:18.072 [main] INFO  uc.seng301.petbattler.asg4.accessor.PlayerAccessor:67 - Getting player with name Bailey from persistence
+00:46:18.118 [main] INFO  uc.seng301.petbattler.asg4.accessor.PlayerAccessor:67 - Getting player with name Bob from persistence
+00:46:18.147 [main] INFO  uc.seng301.petbattler.asg4.accessor.PackAccessor:46 - Creating pack name p1 for player Player (1): Bob
+	Packs:
+
+00:46:18.151 [main] INFO  uc.seng301.petbattler.asg4.accessor.PackAccessor:115 - Persisting pack { packId='null', player='Bob', pets='[]', name='p1'}
+00:46:18.190 [main] INFO  uc.seng301.petbattler.asg4.accessor.PlayerAccessor:67 - Getting player with name Bailey from persistence
+00:46:18.201 [main] INFO  uc.seng301.petbattler.asg4.accessor.PackAccessor:46 - Creating pack name p1 for player Player (2): Bailey
+	Packs:
+
+00:46:18.201 [main] INFO  uc.seng301.petbattler.asg4.accessor.PackAccessor:115 - Persisting pack { packId='null', player='Bailey', pets='[]', name='p1'}
+00:46:18.237 [main] INFO  uc.seng301.petbattler.asg4.accessor.PetAccessor:50 - Creating pet with name Mosquito, attack 5, health 5
+00:46:18.237 [main] INFO  uc.seng301.petbattler.asg4.accessor.PetAccessor:159 - Persisting pet Mosquito -- Atk: 5 Health: 5 Tier: 1
+00:46:18.277 [main] INFO  uc.seng301.petbattler.asg4.accessor.PackAccessor:183 - Update existing pack object { packId='1', player='Bob', pets='[Mosquito -- Atk: 5 Health: 5 Tier: 1]', name='p1'}
+00:46:18.320 [main] INFO  uc.seng301.petbattler.asg4.accessor.PetAccessor:50 - Creating pet with name Duck, attack 3, health 6
+00:46:18.320 [main] INFO  uc.seng301.petbattler.asg4.accessor.PetAccessor:159 - Persisting pet Duck -- Atk: 3 Health: 6 Tier: 1
+00:46:18.356 [main] INFO  uc.seng301.petbattler.asg4.accessor.PackAccessor:183 - Update existing pack object { packId='2', player='Bailey', pets='[Duck -- Atk: 3 Health: 6 Tier: 1]', name='p1'}
+00:46:42.024 [main] INFO  uc.seng301.petbattler.asg4.Game:114 - User input: battle t1 t2
+00:46:42.027 [main] INFO  uc.seng301.petbattler.asg4.Game:316 - battle arguments: battle t1 t2

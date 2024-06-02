@@ -47,6 +47,8 @@ public class BattleRunner {
         cli.getNextLine();
         boolean teamHasLost = false;
         roundCounter = 0;
+        battleCareTaker.saveBattle(new BattleSnapShot(new TeamList(currentBattleSnapshot.getLeftTeam()), new TeamList(currentBattleSnapshot.getRightTeam()), roundCounter));
+
         while (!teamHasLost) {
             roundCounter++;
             if (roundCounter > 20) {
@@ -58,6 +60,8 @@ public class BattleRunner {
             teamHasLost = roundBattle(currentBattleSnapshot.getLeftTeam(), currentBattleSnapshot.getRightTeam());
             // print round outcome
             battlePrinter.printBattleSnapshot(currentBattleSnapshot.getLeftTeam(), currentBattleSnapshot.getRightTeam());
+            battleCareTaker.saveBattle(new BattleSnapShot(new TeamList(currentBattleSnapshot.getLeftTeam()), new TeamList(currentBattleSnapshot.getRightTeam()), roundCounter));
+
 
             if(!teamHasLost){
                 // get user input to continue (or undo/redo)
@@ -67,15 +71,13 @@ public class BattleRunner {
                     String input = cli.getNextLine();
                     switch (input) {
                         case "" -> {
-                            battleCareTaker.saveBattle(new BattleSnapShot(new TeamList(currentBattleSnapshot.getLeftTeam()), new TeamList(currentBattleSnapshot.getRightTeam()), roundCounter));
                             gettingInput = false;
+                            battleCareTaker.removeFuture();
                         }
                         case "undo" -> {
-                            if (roundCounter > 1 || !battleCareTaker.hasUndo()) {
+                            if (roundCounter > 1 || battleCareTaker.hasUndo()) {
                                 currentBattleSnapshot = battleCareTaker.undoBattle();
                                 roundCounter = currentBattleSnapshot.getRoundNumber();
-                                cli.printLine("After enter: " + currentBattleSnapshot.getLeftTeam());
-                                cli.printLine("After enter: " + currentBattleSnapshot.getRightTeam());
                             } else {
                                 cli.printLine("*********************************************************");
                                 cli.printLine("****************** No history to undo. ******************");
@@ -85,11 +87,9 @@ public class BattleRunner {
                             battlePrinter.printBattleSnapshot(currentBattleSnapshot.getLeftTeam(), currentBattleSnapshot.getRightTeam());
                         }
                         case "redo" -> {
-                            if (!battleCareTaker.hasRedo()) {
+                            if (battleCareTaker.hasRedo()) {
                                 currentBattleSnapshot = battleCareTaker.redoBattle();
                                 roundCounter = currentBattleSnapshot.getRoundNumber();
-                                cli.printLine("After enter: " + currentBattleSnapshot.getLeftTeam());
-                                cli.printLine("After enter: " + currentBattleSnapshot.getRightTeam());
                             } else {
                                 cli.printLine("*********************************************************");
                                 cli.printLine("****************** No history to redo. ******************");

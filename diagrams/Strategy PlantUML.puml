@@ -34,9 +34,5 @@ SpecialAbility <|.. BuffSelf
 SpecialAbility <|.. HealSelf
 SpecialAbility <|.. HealBoth
 SpecialAbility <|.. DebuffEnemy
-BattleRunner -.-> BuffSelf
-BattleRunner -.-> HealSelf
-BattleRunner -.-> HealBoth
-BattleRunner -.-> DebuffEnemy
 
 @enduml

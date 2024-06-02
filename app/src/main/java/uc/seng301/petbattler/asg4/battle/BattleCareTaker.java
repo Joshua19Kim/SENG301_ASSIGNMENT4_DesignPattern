@@ -8,31 +8,49 @@ public class BattleCareTaker {
 
     private static LinkedList<BattleSnapShot> momentsToDo;
 
+    private static BattleSnapShot currentBattle;
+
+
+
     public BattleCareTaker() {
         pastMoments = new LinkedList<BattleSnapShot>();
         momentsToDo = new LinkedList<BattleSnapShot>();
 
     }
 
-    public void saveBattle (BattleSnapShot currentBattle) {
-        pastMoments.addLast(currentBattle);
+    public void saveBattle(BattleSnapShot battleSnapShot) {
+        pastMoments.addLast(battleSnapShot);
+        currentBattle = battleSnapShot;
+    }
+
+    public void removeFuture () {
         momentsToDo.clear();
     }
     public BattleSnapShot undoBattle() {
-        BattleSnapShot nextBattle = pastMoments.removeLast();
-        momentsToDo.addLast(nextBattle);
-        return nextBattle;
+        momentsToDo.addLast(pastMoments.removeLast());
+        currentBattle = pastMoments.getLast();
+        return currentBattle;
     }
 
     public BattleSnapShot redoBattle() {
-        BattleSnapShot nextBattle = momentsToDo.removeLast();
-        pastMoments.addLast(nextBattle);
-        return nextBattle;
-
+        currentBattle = momentsToDo.removeLast();
+        pastMoments.addLast(currentBattle);
+        return currentBattle;
     }
 
-    public boolean hasUndo() { return pastMoments.isEmpty();}
+    public boolean hasUndo() {
+        return pastMoments.size() > 1;
+    }
 
-    public boolean hasRedo() { return momentsToDo.isEmpty();}
+    public boolean hasRedo() { return !momentsToDo.isEmpty();}
+
+    public LinkedList<BattleSnapShot> showPast() {
+        return pastMoments;
+    }
+    public LinkedList<BattleSnapShot> showFuture() {
+        return momentsToDo;
+    }
+
+
 
 }

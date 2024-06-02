@@ -22,6 +22,9 @@ This iterator pattern is used in the Super Auto Pets app to:
 
 ./diagrams/sap-iterator-domain.png
 
+Since TeamList has OrderedTeam and ReveredTeam in getOrderedTeam() and getReversedTeam(), the direct associations are applied from TeamList to OrderedTeam and ReversedTeam.
+Additionally, Team is assigned in OrderedTeam and ReversedTeam, so the direct associations are applied from OrderedTeam and reversedTeam to Team
+
 #### Mapping to GoF pattern elements
 
 | GoF element       | Code element |
@@ -78,6 +81,9 @@ This strategy pattern is used in the Super Auto Pets app to:
 #### Name of UML Class diagram attached
 
 ./diagrams/sap-strategy-domain.png
+
+I have chosen GamePet as Context as it does setStrategy which is getRandomAbility().
+Client is BattleRunner because it does doSomeThing() which is useSpecialAbility().
 
 #### Mapping to GoF pattern elements
 

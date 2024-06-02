@@ -19,10 +19,7 @@ public class BattleSnapShot{
     public Team getRightTeam() {
         return rightTeam;
     }
-    public int getRoundNumber() {
-        return roundNumber;
-    }
-
+    public int getRoundNumber() {return roundNumber; }
 
     public void setLeftTeam(Team leftTeam) {this.leftTeam = leftTeam;}
     public void setRightTeam(Team rightTeam) {this.rightTeam = rightTeam;}

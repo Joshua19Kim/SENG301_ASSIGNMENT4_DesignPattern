@@ -1,13 +1,11 @@
 @startuml
-interface Team <<Interface>> {
+interface Team <<Aggregate>> {
   + getName(): String
   + getOrderedTeam(): TeamOrdering
   + getReversedTeam(): TeamOrdering
 }
-note right: Aggregate
 
-
-class TeamList implements Team {
+class TeamList <<ConcreteAggregate>> implements Team {
   - NAME: String
   + TeamList(name: String, pets: List<GamePet>)
   + TeamList(other: Team)
@@ -15,42 +13,37 @@ class TeamList implements Team {
   + getOrderedTeam(): TeamOrdering
   + getReversedTeam(): TeamOrdering
 }
-note right: ConcreteAggregate
 
-
-interface TeamOrdering <<Interface>> {
+interface TeamOrdering <<Iterator>> {
   + getNextPet(): GamePet
   + hasRemainingPets(): boolean
 }
-note left: Iterator
 
 
-class OrderedTeam implements TeamOrdering {
+class OrderedTeam <<ConcreteIteratorA>> implements TeamOrdering {
   - currentIndex: int
   - PETS: Team
   + OrderedTeam(pets: Team)
   + getNextPet(): GamePet
   + hasRemainingPets(): boolean
 }
-note left: ConcreteIteratorA
 
-class ReversedTeam implements TeamOrdering {
+class ReversedTeam <<ConcreteIteratorB>> implements TeamOrdering {
   - currentIndex: int
   - PETS: Team
   + ReversedTeam(pets: Team)
   + getNextPet(): GamePet
   + hasRemainingPets(): boolean
 }
-note right: ConcreteIteratorB
 
-
-class BattleRunner {
+class BattleRunner <<Client>>{
 }
-note right: Client
 
-Team -.-> TeamOrdering
+Team ..> TeamOrdering
 BattleRunner --> Team : > gets
 BattleRunner --> TeamOrdering : > uses
-TeamList <--> ReversedTeam
-TeamList <--> OrderedTeam
+TeamList --> ReversedTeam : > uses
+TeamList --> OrderedTeam : > uses
+OrderedTeam --> Team : > gets
+ReversedTeam --> Team : > gets
 @enduml
