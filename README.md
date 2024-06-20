@@ -1,5 +1,13 @@
-# SENG301 Assignment 3 (2024) - Grade:A+
+# SENG301 Assignment 4 (2024) - Grade:A+
 
+
+## Project Overview:
+In this assignment, I identified and implemented design patterns within a Java-based Super Auto Pets Clone App.
+Key tasks included retro-documenting a UML Class Diagram, refactoring code for new features, and applying design patterns to enhance functionality.
+Technologies used included Gradle, Cucumber, Mockito, and Log4j2. Through this assignment, I deepened my understanding of design patterns, 
+refactoring techniques, and UML documentation, significantly enhancing my software engineering skills.
+
+---
 ## Context
 
 This material is part of the SENG301 assignment 4. It contains a series of Java
