@@ -1,0 +1,43 @@
+@startuml
+
+
+
+class BattleCareTaker <<Caretaker>> {
+    - PASTMOMENTS : LinkedList<BattleSnapShot>
+    - MOMENTSTODO : LinkedList<BattleSnapShot>
+    - currentBattle : BattleSnapShot
+    + saveBattle(BattleSnapShot)
+    + undoBattle(): BattleSnapShot
+    + redoBattle(): BattleSnapShot
+
+}
+
+class BattleSnapShot <<Memento>> {
+     - leftTeam : Team
+     - rightTeam : Team
+     + getLeftTeam() : Team
+     + getRightTeam() : Team
+     + setRightTeam() : Team
+     + setRightTeam() : Team
+}
+
+class BattleRunner <<Originator>> {
+    - LEFTTEAM : Team
+    - RIGHTTEAM : Team
+    - battleCareTaker : BattleCareTaker
+    + saveBattleSnapshot(Team, Team) : BattleSnapShot
+    + updateTeam(BattleSnapShot)
+
+}
+
+
+
+BattleSnapShot "0..*"--o BattleCareTaker
+BattleRunner ..> BattleSnapShot
+BattleRunner  --> BattleCareTaker : > uses
+
+
+'
+'Game --> CloneablePet : > clones
+'CloneablePet <|.. Pet
+@enduml

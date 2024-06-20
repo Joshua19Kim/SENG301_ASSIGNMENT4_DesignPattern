@@ -1,0 +1,26 @@
+@startuml
+class Game <<Client>> {
+}
+
+
+interface CloneablePet <<Prototype>> {
+    + getGamePet() : GamePet
+}
+
+class Pet <<ConcretePrototype>> {
+    + Pet()
+    + getGamePet() : GamePet
+}
+
+class GamePet <<SubclassPrototype>> extends Pet {
+    - SPECIALABILITY : SpecialAbility
+    + GamePet(String, int, int, String)
+    + GamePet(String, int, int, String, SpecialAbility)
+    + getGamePet() : GamePet
+    + getSpecialAbility() : SpecialAbility
+}
+
+
+Game --> CloneablePet : > clones
+CloneablePet <|.. Pet
+@enduml

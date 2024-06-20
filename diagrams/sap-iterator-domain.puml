@@ -1,0 +1,49 @@
+@startuml
+interface Team <<Aggregate>> {
+  + getName(): String
+  + getOrderedTeam(): TeamOrdering
+  + getReversedTeam(): TeamOrdering
+}
+
+class TeamList <<ConcreteAggregate>> implements Team {
+  - NAME: String
+  + TeamList(name: String, pets: List<GamePet>)
+  + TeamList(other: Team)
+  + getName(): String
+  + getOrderedTeam(): TeamOrdering
+  + getReversedTeam(): TeamOrdering
+}
+
+interface TeamOrdering <<Iterator>> {
+  + getNextPet(): GamePet
+  + hasRemainingPets(): boolean
+}
+
+
+class OrderedTeam <<ConcreteIteratorA>> implements TeamOrdering {
+  - currentIndex: int
+  - PETS: Team
+  + OrderedTeam(pets: Team)
+  + getNextPet(): GamePet
+  + hasRemainingPets(): boolean
+}
+
+class ReversedTeam <<ConcreteIteratorB>> implements TeamOrdering {
+  - currentIndex: int
+  - PETS: Team
+  + ReversedTeam(pets: Team)
+  + getNextPet(): GamePet
+  + hasRemainingPets(): boolean
+}
+
+class BattleRunner <<Client>>{
+}
+
+Team ..> TeamOrdering
+BattleRunner --> Team : > gets
+BattleRunner --> TeamOrdering : > uses
+TeamList --> ReversedTeam : > uses
+TeamList --> OrderedTeam : > uses
+OrderedTeam --> Team : > gets
+ReversedTeam --> Team : > gets
+@enduml

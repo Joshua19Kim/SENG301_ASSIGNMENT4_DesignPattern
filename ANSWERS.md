@@ -2,6 +2,10 @@
 
 Joshua Byoungsoo Kim (bki42 , Student ID: 68493559)
 
+
+NOTE : In diagram, FINAL attribute is shown in Capital letters (Reference link below)
+Reference - https://stackoverflow.com/questions/47588511/uml-diagram-how-to-show-final
+
 ## Task 1 - Identify the patterns in the code
 
 
@@ -107,21 +111,34 @@ Client is BattleRunner because it does doSomeThing() which is useSpecialAbility(
 
 ### What pattern fulfils the need for the feature?
 
-**YOUR ANSWER**
+Memento pattern
 
 ### What is its goal and why is it needed here?
 
-**YOUR ANSWER**
+The requirement is making undo/redo function in the game and the memento pattern provides 
+the ability to restore an object to its previous state.
+Therefore, the user can move backward to the previous round(s) if he/she has played at least once, 
+also can move forward to the undone round.
 
 ### Name of UML Class diagram attached
 
-**YOUR ANSWER**
+./diagrams/sap-memento-domain.png
+
+createMemento() is in setMemento() which is saveBattleSnapShot() for the tidiness of the code.
 
 ### Mapping to GoF pattern elements
 
-| GoF element | Code element |
-| ----------- | ------------ |
-|             |              |
+| GoF element  | Code element                      |
+|--------------|-----------------------------------|
+| Originator   | BattleRunner                      |
+| Memento      | BattleSnapShot                    |
+| Caretaker    | BattleCareTaker                   |
+| getStateA()  | BattleSnapShot.getLeftTeam()      |
+| getStateB()  | BattleSnapShot.getRightTeam()     |
+| setStateA()  | BattleSnapShot.setLeftTeam()      |
+| setStateB()  | BattleSnapShot.setRightTeam()     |
+| setMemento() | BattleRunner.saveBattleSnapshot() |
+
 
 ## Task 4 - BONUS - Acceptance tests for Task 4
 

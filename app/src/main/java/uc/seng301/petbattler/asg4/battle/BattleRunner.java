@@ -15,10 +15,7 @@ public class BattleRunner {
     private final BattlePrinter battlePrinter;
     private final Team leftTeam;
     private final Team rightTeam;
-    private int roundCounter;
-
-    BattleSnapShot currentBattleSnapshot;
-    BattleCareTaker battleCareTaker;
+    private final BattleCareTaker battleCareTaker;
 
     /**
      * Create a new BattleHelper object and run a battle between two teams
@@ -34,9 +31,34 @@ public class BattleRunner {
         this.leftTeam =  leftTeam;
         this.rightTeam = rightTeam;
         battleCareTaker = new BattleCareTaker();
-        currentBattleSnapshot = new BattleSnapShot(new TeamList(leftTeam),new TeamList(rightTeam),roundCounter);
+
+
     }
 
+    /**
+     * Creates and returns a snapshot of the current battle state.
+     *
+     * @param lTeam the left team to be saved in the snapshot
+     * @param rTeam the right team to be saved in the snapshot
+     * @return the created BattleSnapShot
+     */
+    public BattleSnapShot saveBattleSnapShot(Team lTeam, Team rTeam) {
+        BattleSnapShot newBattleSnapShot = new BattleSnapShot();
+        newBattleSnapShot.setLeftTeam(lTeam);
+        newBattleSnapShot.setRightTeam(rTeam);
+        return newBattleSnapShot;
+    }
+    /**
+     * Updates the current teams to the state stored in the given snapshot.
+     *
+     * @param battleSnapShot the snapshot to restore the teams from
+     */
+    public void updateTeam (BattleSnapShot battleSnapShot) {
+        leftTeam.clear();
+        rightTeam.clear();
+        leftTeam.addAll(battleSnapShot.getLeftTeam());
+        rightTeam.addAll(battleSnapShot.getRightTeam());
+    }
     /**
      * Main battling functionality
      */
@@ -46,22 +68,20 @@ public class BattleRunner {
         cli.printLine("press enter to continue");
         cli.getNextLine();
         boolean teamHasLost = false;
-        roundCounter = 0;
-        battleCareTaker.saveBattle(new BattleSnapShot(new TeamList(currentBattleSnapshot.getLeftTeam()), new TeamList(currentBattleSnapshot.getRightTeam()), roundCounter));
-
+        int roundCounter = 0;
+        battleCareTaker.saveBattle(saveBattleSnapShot(new TeamList(leftTeam), new TeamList(rightTeam)));
         while (!teamHasLost) {
             roundCounter++;
             if (roundCounter > 20) {
                 // battle has been going on for too many rounds, assume some infinite loop due to abilities
                 break;
             }
-            cli.printLine("Round: " + roundCounter );
+            cli.printLine("Round: " + roundCounter);
             // do battle
-            teamHasLost = roundBattle(currentBattleSnapshot.getLeftTeam(), currentBattleSnapshot.getRightTeam());
+            teamHasLost = roundBattle(leftTeam, rightTeam);
             // print round outcome
-            battlePrinter.printBattleSnapshot(currentBattleSnapshot.getLeftTeam(), currentBattleSnapshot.getRightTeam());
-            battleCareTaker.saveBattle(new BattleSnapShot(new TeamList(currentBattleSnapshot.getLeftTeam()), new TeamList(currentBattleSnapshot.getRightTeam()), roundCounter));
-
+            battlePrinter.printBattleSnapshot(leftTeam, rightTeam);
+            battleCareTaker.saveBattle(saveBattleSnapShot(new TeamList(leftTeam), new TeamList(rightTeam)));
 
             if(!teamHasLost){
                 // get user input to continue (or undo/redo)
@@ -72,31 +92,30 @@ public class BattleRunner {
                     switch (input) {
                         case "" -> {
                             gettingInput = false;
-                            battleCareTaker.removeFuture();
                         }
                         case "undo" -> {
-                            if (roundCounter > 1 || battleCareTaker.hasUndo()) {
-                                currentBattleSnapshot = battleCareTaker.undoBattle();
-                                roundCounter = currentBattleSnapshot.getRoundNumber();
+                            if (roundCounter >= 1 || battleCareTaker.hasUndo()) {
+                                updateTeam(battleCareTaker.undoBattle());
+                                roundCounter--;
                             } else {
                                 cli.printLine("*********************************************************");
                                 cli.printLine("****************** No history to undo. ******************");
                                 cli.printLine("*********************************************************");
                             }
-                            cli.printLine("Round: " + roundCounter );
-                            battlePrinter.printBattleSnapshot(currentBattleSnapshot.getLeftTeam(), currentBattleSnapshot.getRightTeam());
+                            cli.printLine("Round: " + roundCounter);
+                            battlePrinter.printBattleSnapshot(leftTeam, rightTeam);
                         }
                         case "redo" -> {
                             if (battleCareTaker.hasRedo()) {
-                                currentBattleSnapshot = battleCareTaker.redoBattle();
-                                roundCounter = currentBattleSnapshot.getRoundNumber();
+                                updateTeam(battleCareTaker.redoBattle());
+                                roundCounter++;
                             } else {
                                 cli.printLine("*********************************************************");
                                 cli.printLine("****************** No history to redo. ******************");
                                 cli.printLine("*********************************************************");
                             }
-                            cli.printLine("Round: " + roundCounter );
-                            battlePrinter.printBattleSnapshot(currentBattleSnapshot.getLeftTeam(), currentBattleSnapshot.getRightTeam());
+                            cli.printLine("Round: " + roundCounter);
+                            battlePrinter.printBattleSnapshot(leftTeam, rightTeam);
                         }
                         default -> cli.printLine("Invalid option");
                     }
